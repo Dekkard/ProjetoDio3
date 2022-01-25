@@ -1,0 +1,30 @@
+debug: true
+server:
+   port: 7955
+spring:
+   autoconfigure:
+      exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+   main:
+      allow-bean-definition-overriding: true
+   datasource:
+      name: test
+      url: jdbc:h2:file:~/test # JDBC URL of the database. jdbc:h2:tcp://localhost/~/test, jdbc:h2:mem:test, jdbc:h2:~/test
+      driver-class-name: org.h2.Driver
+      embedded-database-connection: H2
+      username: "sa" # Login username of the database.
+      password: ""# Login password of the database.
+   session:
+      store-type: jdbc # Session store type.
+      jdbc:
+         initialize-schema: embedded # Database schema initialization mode.
+         schema: classpath:org/springframework/session/jdbc/schema-@@platform@@.sql # Path to the SQL file to use to initialize the database schema.
+         table-name: SPRING_SESSION # Name of the database table used to store sessions.
+   h2:
+      console:
+         enabled: true
+         path: /h2-ui # default path: /h2-console, /h2-ui
+   jpa:
+      show-sql: true
+      database-platform: org.hibernate.dialect.H2Dialect #properties: hibernate: dialect: org.hibernate.dialect.H2Dialect
+      hibernate.ddl-auto: update
+      database: H2
